@@ -51,10 +51,6 @@ func getQueryLocale(scope *gorm.DB) (locale string, isLocale bool) {
 	if str, ok := scope.Get("l10n:locale"); ok {
 		if locale, ok := str.(string); ok && locale != "" {
 
-			fmt.Println(locale != Global)
-			fmt.Println(locale)
-			fmt.Println(Global)
-
 			return locale, locale != Global
 		}
 	}
@@ -62,16 +58,12 @@ func getQueryLocale(scope *gorm.DB) (locale string, isLocale bool) {
 }
 
 func getLocale(scope *gorm.DB) (locale string, isLocale bool) {
-	fmt.Println("getLocale")
 	if str, ok := scope.Get("l10n:localize_to"); ok {
 		if locale, ok := str.(string); ok && locale != "" {
-
-			fmt.Println(locale, ok)
 			return locale, locale != Global
 		}
 	}
 
-	fmt.Println("getLocale - getQueryLocale")
 	return getQueryLocale(scope)
 }
 
